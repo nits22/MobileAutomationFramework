@@ -40,4 +40,4 @@ Other tips:
 4. Make sure that your appium server is up and running before starting the tests.
 
 Please feel to report any issue or PR for any improvements.
-Reach me at mech.amuthansakthivel@gmail.com
+Reach me at nitishbector.it@gmail.com
