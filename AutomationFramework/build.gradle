@@ -1,0 +1,61 @@
+buildscript {
+    ext {
+        seleniumJavaClient= '4.18.1'
+        testng= '7.8.0'
+        appiumClientVersion = '8.3.0'
+        webDriverManagerVersion = '5.2.3'
+        awaitilityVersion = '1.7.0'
+        gsonVersion = '2.8.6'
+        lombokVersion = '1.18.24'
+        apacheCommonLangVersion = '3.1'
+        apacheCommonsVersion = '2.8.0'
+    }
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'net.jodah', name: 'failsafe', version: '2.0.0'
+    implementation group: 'com.google.api-client', name: 'google-api-client', version: '2.2.0'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.9.0'
+    implementation group: 'org.testng', name: 'testng', version: "$testng"
+    implementation "io.github.bonigarcia:webdrivermanager:$webDriverManagerVersion"
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: "$seleniumJavaClient"
+    implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
+    testImplementation 'org.testng:testng:7.1.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task runTests(type: Test){
+    systemProperties = [
+            env : ""
+    ]
+    systemProperties System.getProperties()
+
+    useTestNG {
+        parallel = System.getProperty('parallel', 'none')
+        testLogging.exceptionFormat = 'full'
+        testLogging.showStandardStreams = true
+        preserveOrder = true
+        threadCount = Integer.parseInt(System.getProperty('threadcount', '1'))
+        useDefaultListeners = true
+        includeGroups System.getProperty('tag', '')
+        outputDirectory = file("$buildDir/" + systemProperties["tag"])
+    }
+}

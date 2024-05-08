@@ -1,0 +1,28 @@
+{
+  "run_mode": "remote",
+  "server": {
+    "hostname": "",
+    "port": "",
+    "username": "",
+    "access_key": ""
+  },
+  "desired_capabilities": {
+    "web_standard": {
+      "acceptInsecureCerts": true
+    },
+    "custom": {}
+  },
+  "browser": {
+    "browserName": "chrome",
+    "version": "",
+    "platformName": "ANY",
+    "launch_configuration": {
+      "maximize": false  ,
+      "headless": false,
+      "implicit_wait": 5,
+      "download_path": "/tmp/download",
+      "log_level": "DEBUG"
+    }
+  }
+
+}
